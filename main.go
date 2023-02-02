@@ -56,8 +56,6 @@ func hashvalue(msg string) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 func (node *Tnode) Find(s string) bool {
-	// fmt.Println("the string hash is", s)
-
 	if node.hash == s {
 		fmt.Println(node.hash == s)
 		return true
@@ -106,52 +104,41 @@ func Delete(data []string, s string) []string {
 	return data
 
 }
-
-// func verify(s string) {
-// 	verifyhash := hashvalue(s)
-// 	if
-// }
 func main() {
-	data := []string{"a", "b"}
-	// ans := MerkleTreeNode(data)
-
-	fmt.Println(" 1.ADD the value \n 2.Delete the String \n 3.Verify")
-	// ans.head.printtree(0)
-	// del := Delete(data, "a")
-	// ans := MerkleTreeNode(del)
-	var op int
-	fmt.Scan(&op)
-	switch op {
-	case 1:
-		fmt.Println("enter the value to be added")
-		var n string
-		fmt.Scan(&n)
-		data = append(data, n)
-		ans := MerkleTreeNode(data)
-		ans.head.printtree(0)
-	case 2:
-		fmt.Println("enter the string to be deleted")
-		var s string
-		fmt.Scan(&s)
-		data = Delete(data, s)
-		ans := MerkleTreeNode(data)
-		ans.head.printtree(0)
-	case 3:
-		ans := MerkleTreeNode(data)
-		fmt.Println("enter the string to be searched")
-		var searched string
-		fmt.Scan(&searched)
-		b := ans.head.Find(hashvalue(searched))
-		if b == true {
-			fmt.Println("The string found in the merkle tree")
-		} else {
-			fmt.Println("the string did not found")
+	data := []string{}
+Loop:
+	for {
+		fmt.Println(" 1.ADD the value \n 2.Delete the String \n 3.Verify \n 4.Exit")
+		var op int
+		fmt.Scan(&op)
+		switch op {
+		case 1:
+			fmt.Println("enter the value to be added")
+			var n string
+			fmt.Scan(&n)
+			data = append(data, n)
+			ans := MerkleTreeNode(data)
+			ans.head.printtree(0)
+		case 2:
+			fmt.Println("enter the string to be deleted")
+			var s string
+			fmt.Scan(&s)
+			data = Delete(data, s)
+			ans := MerkleTreeNode(data)
+			ans.head.printtree(0)
+		case 3:
+			ans := MerkleTreeNode(data)
+			fmt.Println("enter the string to be searched")
+			var searched string
+			fmt.Scan(&searched)
+			b := ans.head.Find(hashvalue(searched))
+			if b == true {
+				fmt.Println("The string found in the merkle tree")
+			} else {
+				fmt.Println("the string did not found")
+			}
+		case 4:
+			break Loop
 		}
-		// }
-		// ans.head.printtree(0)
-		// a := ans.head.Find(hashvalue("a"))
-		// fmt.Println(a)
-		// fmt.Println(ans.head)
-		// fmt.Println(ans.head)
 	}
 }
